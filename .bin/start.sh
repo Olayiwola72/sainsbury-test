@@ -5,5 +5,3 @@ if [ -d "/projects/app/.theia" ]; then
     cp -R /projects/app/.theia /projects/.theia
   fi
 fi
-
-sh /projects/app/start.sh
