@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -d "/projects/app/.theia" ]; then
   if [ ! -d "/projects/.theia" ]; then
