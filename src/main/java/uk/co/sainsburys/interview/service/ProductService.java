@@ -26,7 +26,7 @@ public class ProductService {
         this.productsClient = productsClient;
     }
 
-    public List<UnifiedProduct> getProducts(Optional<String> typeFilter) {
+    public List<UnifiedProduct> getProducts(String typeFilter) {
         Set<Product> products = productsClient.getProducts();
         Set<ProductPrice> productPrices = productsClient.getProductsPrices();
 
@@ -36,7 +36,7 @@ public class ProductService {
 
         // Merge products and prices, applying filters
         return products.stream()
-                .filter(product -> typeFilter.isEmpty() || product.productType().equalsIgnoreCase(typeFilter.get()))
+                .filter(product -> typeFilter == null || typeFilter.isEmpty() || product.productType().equalsIgnoreCase(typeFilter))
                 .map(product -> UnifiedProductMapper.mapToDTO(product, priceMap.get(product.productUid())))
                 .filter(Objects::nonNull) // Remove entries where no matching ProductPrice exists
                 .collect(Collectors.toList());

@@ -7,7 +7,6 @@ import uk.co.sainsburys.interview.controller.response.UnifiedProduct;
 import uk.co.sainsburys.interview.service.ProductService;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 
@@ -25,9 +24,10 @@ public class ProductController {
         this.productService = productService;
     }
 
+
     @GetMapping("/products")
-    public List<UnifiedProduct> getProducts(@RequestParam Optional<String> type) {
-        return productService.getProducts(type); // Retrieves products based on the optional type parameter
+    public List<UnifiedProduct> getProducts(@RequestParam(name = "type", required = false) String type) {
+        return productService.getProducts(type); // Pass null or the provided type to the service
     }
 
 }
